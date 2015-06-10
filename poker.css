@@ -1,0 +1,30 @@
+#poker-container .poke {
+  background-color: #333;
+  border-radius: 3px;
+  clear: left;
+  color: white;
+  display: inline-block;
+  float: left;
+  opacity: 0.9;
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+}
+
+#poker-container .poke:hover {
+  box-shadow: #333 0 0 12px;
+  cursor: pointer;
+  opacity: 1;
+}
+
+#poker-container .poke p {
+  font: normal 14px 'Tahoma', sans-serif;
+  line-height: 25px;
+  padding: 0 18px;
+}
+
+#poker-container .poke span {
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
