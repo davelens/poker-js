@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-language" content="en">
+  <title>Poker.js</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="poker.js"></script>
+
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic" rel="stylesheet" type="text/css" />
+  <link href="poker.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      color: #333;
+      font-family: 'PT Sans';
+      font-size: 1.2em;
+    }
+
+    footer {
+      border-top: 1px solid #ccc;
+      font-size: 0.6em;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    section.wrapper {
+      margin: 0 auto;
+      width: 600px;
+    }
+
+    hr {
+      border: none;
+      border-bottom: 1px solid #ccc;
+    }
+
+    h2 { font-size: 1.2em; }
+    h3 { font-size: 1em; }
+
+    pre {
+      margin: 0;
+      padding: 0;
+    }
+
+    code {
+      background-color: #333;
+      color: #eee;
+      display: block;
+      margin-bottom: 20px;
+      padding: 10px;
+      font-size: 0.9em;
+      width: auto;
+    }
+  </style>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var config = {
+        message: 'This is a test of a default poke',
+        default: {},
+        quick: { params: { timeout: 1000 } },
+        no_close: { params: { close_button: false } },
+        left: { params: { x: 'left' } },
+        bottom_left: { params: { x: 'left', y: 'bottom' } },
+        bottom_right: { params: { x: 'right', y: 'bottom' } },
+        html_markup: { message: '<strong>Bold</strong> <em>italic</em> <u>underline</u>.' },
+        html_image: { message: '<img src="http://cdn.flaticon.com/png/256/32175.png" alt="" /> Way too big.' },
+        long: {
+          message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s',
+        },
+      }
+
+      $('ul#examples li a').on('click', function(e){
+        e.preventDefault();
+        var options = config[$(this).attr('href').substr(1)];
+        Poker.poke(options.message || config.message, options.params || {});
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <section class="wrapper">
+    <h1>Poker.js <small> — Growl-esque notifications for your web app</small></h1>
+    <hr />
+
+    <h2>Examples</h2>
+    <ul id="examples">
+      <li><a href="#default">Default notification</a></li>
+      <li><a href="#long">With a long message</a></li>
+      <li><a href="#quick">With a timeout of 1s before fade</a></li>
+      <li><a href="#html_markup">With basic markup</a> or <a href="#html_image"> an image</a></li>
+      <li><a href="#no_close">Without the &ldquo;&times;&rdquo;</a></li>
+      <li><a href="#left">Aligned to the left</a></li>
+      <li><a href="#bottom_left">Aligned to the bottom left</a></li>
+      <li><a href="#bottom_right">Aligned to the bottom right</a></li>
+    </ul>
+
+    <h2>Download</h2>
+    <p>You can find <a href="https://github.com/davelens/poker-js/archive/1.0.0.zip">the latest release</a> on <a href="https://github.com/davelens/poker-js">GitHub</a>.</p>
+
+    <h2>Installation</h2>
+    <p>Make sure you have jQuery loaded, or load it from a public CDN:</p>
+    <code>
+      &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"&gt;&lt;/script&gt;
+    </code>
+    <p>
+      Grab the following files from the <a href="https://github.com/davelens/poker-js">repo</a> and put them in your page <em>&lt;head&gt;</em>:
+    </p>
+    <code>
+      &lt;script src="poker.js"&gt;&lt;/script&gt;<br />
+      &lt;link href="poker.css" rel="stylesheet" type="text/css" /&gt;
+    </code>
+
+    <h2>Signature</h2>
+    <code>
+      Poker.poke(message, options = {});
+    </code>
+
+    <h2>Usage</h2>
+    <code>
+      Poker.poke('This is a test of a default poke');
+    </code>
+
+    <code>
+      Poker.poke('This is a test of a quick poke', { timeout: 1000 });
+    </code>
+
+    <h2>Configuration</h2>
+    <p>These are all the options you can override in the <em>options</em> parameter:</p>
+    <code>
+      <pre>
+{
+  close_button: true,
+  container: {
+    css: {
+      maxWidth: '400px',
+      padding: '0 12px',
+      position: 'fixed',
+      zIndex: '9999'
+    }
+  },
+  timeout: 5000,
+  x: 'right',
+  y: 'top'
+}</pre>
+    </code>
+
+    <footer>
+      Dave Lens &copy; 2015 — <a href="https://github.com/davelens">Github</a> — <a href="https://twitter.com/davelens">Twitter</a>
+    </footer>
+  </section>
+</body>
+</html>

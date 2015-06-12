@@ -65,9 +65,11 @@
   Poker.Notification.prototype.bind_events = function() {
     var notification = this;
     notification._element.on('click', notification.click_listener);
-    notification._element.delay(notification._options.timeout).fadeOut(function(){
-      notification.remove();
-    });
+    if(notification._options.timeout !== false) {
+      notification._element.delay(notification._options.timeout).fadeOut(function(){
+        notification.remove();
+      });
+    }
   };
 
   Poker.Notification.prototype.remove = function() {
