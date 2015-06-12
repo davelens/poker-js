@@ -49,29 +49,32 @@
     this._message = message;
     this._options = options;
     this._container = container;
+    this._element = this.to_html();
   };
 
   Poker.Notification.prototype.add_to = function(y) {
-    var el = this.to_html();
-
     if(y == 'bottom') {
-      el.appendTo(this._container.to_html()).fadeIn();
+      this._element.appendTo(this._container.to_html()).fadeIn();
     } else {
-      el.prependTo(this._container.to_html()).fadeIn();
+      this._element.prependTo(this._container.to_html()).fadeIn();
     }
 
-    this.bind_events(el);
+    this.bind_events();
   };
 
-  Poker.Notification.prototype.bind_events = function(el) {
+  Poker.Notification.prototype.bind_events = function() {
     var notification = this;
-    el.on('click', this.click_listener);
-    el.delay(this._options.timeout).fadeOut(function(){
-      this.remove();
-      if(notification._container.to_html().html() == '') {
-        notification._container.to_html().remove();
-      }
+    notification._element.on('click', notification.click_listener);
+    notification._element.delay(notification._options.timeout).fadeOut(function(){
+      notification.remove();
     });
+  };
+
+  Poker.Notification.prototype.remove = function() {
+    this._element.remove();
+    if(this._container.to_html().html() == '') {
+      this._container.to_html().remove();
+    }
   };
 
   Poker.Notification.prototype.click_listener = function(e) {
